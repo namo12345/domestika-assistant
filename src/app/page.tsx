@@ -2,14 +2,20 @@
 'use client';
 import React, { useState } from 'react';
 import { Upload, Camera, MessageSquare, BookOpen, TrendingUp, CheckCircle, ArrowRight } from 'lucide-react';
-
+type Feedback = {
+  strengths: string[];
+  improvements: string[];
+  techniques: string[];
+  nextSteps: string[];
+};
 const DomestikaAIAssistant = () => {
   const [currentStep, setCurrentStep] = useState('upload');
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [selectedCourse, setSelectedCourse] = useState('');
   const [focusArea, setFocusArea] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [feedback, setFeedback] = useState(null);
+  const [feedback, setFeedback] = useState<Feedback | null>(null);
+
 
   const courses = [
     'Watercolor Fundamentals',
