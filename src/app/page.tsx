@@ -27,7 +27,7 @@ const DomestikaAIAssistant = () => {
     'Overall Improvement'
   ];
 
-  const handleImageUpload = (event) => {
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
