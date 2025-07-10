@@ -5,7 +5,7 @@ import { Upload, Camera, MessageSquare, BookOpen, TrendingUp, CheckCircle, Arrow
 
 const DomestikaAIAssistant = () => {
   const [currentStep, setCurrentStep] = useState('upload');
-  const [uploadedImage, setUploadedImage] = useState(null);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [selectedCourse, setSelectedCourse] = useState('');
   const [focusArea, setFocusArea] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -33,7 +33,6 @@ const DomestikaAIAssistant = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         setUploadedImage((e.target as FileReader).result as string);
-
         setCurrentStep('details');
       };
       reader.readAsDataURL(file);
