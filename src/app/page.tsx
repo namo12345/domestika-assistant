@@ -32,7 +32,8 @@ const DomestikaAIAssistant = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setUploadedImage(e.target.result);
+        setUploadedImage((e.target as FileReader).result as string);
+
         setCurrentStep('details');
       };
       reader.readAsDataURL(file);
