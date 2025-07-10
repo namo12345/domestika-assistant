@@ -1,13 +1,14 @@
-// ✅ Fully Updated Domestika AI Assistant with Polished UI and Fixed Styles
 'use client';
 import React, { useState } from 'react';
 import { Upload, Camera, MessageSquare, BookOpen, TrendingUp, CheckCircle, ArrowRight } from 'lucide-react';
+
 type Feedback = {
   strengths: string[];
   improvements: string[];
   techniques: string[];
   nextSteps: string[];
 };
+
 const DomestikaAIAssistant = () => {
   const [currentStep, setCurrentStep] = useState('upload');
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
@@ -15,7 +16,6 @@ const DomestikaAIAssistant = () => {
   const [focusArea, setFocusArea] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
-
 
   const courses = [
     'Watercolor Fundamentals',
@@ -38,8 +38,11 @@ const DomestikaAIAssistant = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setUploadedImage((e.target as FileReader).result as string);
-        setCurrentStep('details');
+        const result = (e.target as FileReader).result;
+        if (typeof result === 'string') {
+          setUploadedImage(result);
+          setCurrentStep('details');
+        }
       };
       reader.readAsDataURL(file);
     }
@@ -154,7 +157,9 @@ ONLY return raw JSON (no explanations, no markdown) like this:
       <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-6">🎯 Add Context</h2>
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <img src={uploadedImage} alt="preview" className="w-full h-64 object-cover rounded border" />
+          {uploadedImage && (
+            <img src={uploadedImage} alt="preview" className="w-full h-64 object-cover rounded border" />
+          )}
         </div>
         <div className="space-y-4">
           <select value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)} className="w-full border border-gray-400 text-gray-800 font-medium p-2 rounded">
